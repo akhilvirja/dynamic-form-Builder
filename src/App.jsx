@@ -4,6 +4,7 @@ import Layout from './layout/Layout'
 import FormsList from './components/FormsList'
 import FormBuilder from './components/FormBuilder'
 import FormViewer from './components/FormViewer'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </Routes>
         </Layout>
       </div>
+      <Toaster />
     </Router>
   )
 }

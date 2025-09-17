@@ -4,6 +4,7 @@ import DynamicForm from './DynamicForm'
 import FieldSidebar from './FieldSidebar'
 import { Button } from './ui/button'
 import { Trash2, Edit, Save, ArrowLeft } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 function FormBuilder() {
   const { formId } = useParams()
@@ -145,7 +146,7 @@ function FormBuilder() {
       setFormTitle('New Form')
     }
     
-    alert(`Form ${isEditing ? 'updated' : 'saved'} successfully!`)
+    toast.success(`Form ${isEditing ? 'updated' : 'saved'} successfully!`)
     navigate('/forms')
   }
 
