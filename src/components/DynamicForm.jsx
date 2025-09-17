@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import Textbox from "./common/textbox"
+import Textbox from "./common/Textbox"
 import Title from "./common/Title"
 import Dropdown from "./common/Dropdown"
 import CheckboxWithLabel from "./common/CheckboxWithLabel"
