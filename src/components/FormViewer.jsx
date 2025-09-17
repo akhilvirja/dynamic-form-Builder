@@ -96,7 +96,7 @@ function FormViewer() {
       case 'dropdown':
         return (
           <div key={index} className="space-y-2">
-            <Dropdown label={field.label} name={name} defaultValue={value} required={field.required} options={field.options} handleChange={handleChange} />
+            <Dropdown label={field.label} name={name} defaultValue={field.default} required={field.required} options={field.options} handleChange={handleChange} />
           </div>
         )
 

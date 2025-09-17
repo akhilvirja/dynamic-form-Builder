@@ -62,7 +62,7 @@ function DynamicForm({ schema = [], setFieldType }) {
           case "checkbox":
             return (
               <div key={idx} className="flex items-center space-x-2">
-                <CheckboxWithLabel label={field.label} name={field.name} checked={formData[field.name]} handleChange={handleChange} required={field.required} />
+                <CheckboxWithLabel label={field.label} name={field.name} checked={formData[field.name]} handleChange={handleChange} />
               </div>
             )
 

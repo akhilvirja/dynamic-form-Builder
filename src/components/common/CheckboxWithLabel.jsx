@@ -14,7 +14,6 @@ function CheckboxWithLabel({label, name, checked=false, handleChange, required =
         />
         <Label>
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
         </Label>
     </>
   )
