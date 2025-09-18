@@ -53,9 +53,43 @@ function FormViewer() {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
+  function validatePassword(fieldInfo){
+    console.log(fieldInfo)
+    let value = formData[fieldInfo.name]
+    let error = ""
+    if(fieldInfo.minLength && value.length < fieldInfo.minLength){
+      error+=`Password must be at least ${fieldInfo.minLength} characters\n`
+    }
+    if(fieldInfo.reqNumber && !/\d/.test(value)){
+      error+=`Password must include at least one number\n`
+    }
+    if(fieldInfo.reqSpecial && !/[!@#$%^&*]/.test(value)){
+      error+=`Password must include at least one special character\n`
+    }
+    if(fieldInfo.reqUpper && !/[A-Z]/.test(value)){
+      error+=`Password must include at least one Upper case letter\n`
+    }
+
+    setErrors((prevValue) => ({...prevValue, [fieldInfo.name]: error}))
+    if(error){
+      return false
+    }
+    return true
+  }
+
 
   const handleSubmit = (e) => {
+    setErrors({})
     e.preventDefault()
+
+    let passwordField = form.schema.filter((field) => field.inputType === "password")
+
+    if(passwordField.length > 0){
+      if(!validatePassword(passwordField[0])){
+        console.log(errors)
+        return
+      }
+    }
 
     const submission = {
       formId: form.id,
@@ -90,7 +124,9 @@ function FormViewer() {
       case 'text':
         return (
           <div key={index} className="space-y-2">
-            <Textbox name={name} label={field.label} required={field.required} value={value} handleChange={handleChange} placeholder={field.placeholder} />          </div>
+            <Textbox name={name} label={field.label} required={field.required} value={value} handleChange={handleChange} placeholder={field.placeholder} type={field.inputType} />
+            {errors[name] && <div className='text-xs text-red-500'>{errors[name]}</div>}          
+          </div>
         )
 
       case 'dropdown':

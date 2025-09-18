@@ -41,7 +41,7 @@ function DynamicForm({ schema = [], setFieldType }) {
           case "text":
             return (
               <div key={idx} className="space-y-1">
-                <Textbox name={field.name} label={field.label} required={field.required} value={formData[field.name]} handleChange={handleChange} />
+                <Textbox name={field.name} label={field.label} required={field.required} value={formData[field.name]} handleChange={handleChange} type={field.inputType} />
               </div>
             )
 

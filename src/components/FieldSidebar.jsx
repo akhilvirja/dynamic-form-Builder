@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Cross, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
+import { Label } from "./ui/label";
+import CheckboxWithLabel from "./common/CheckboxWithLabel";
 
 function FieldSidebar({ open, onClose, type, draft, onChangeDraft, onSave }) {
   const [local, setLocal] = useState(draft || {});
@@ -39,6 +41,19 @@ function FieldSidebar({ open, onClose, type, draft, onChangeDraft, onSave }) {
               />
             </div>
             <div>
+              <label className="block text-sm font-medium">Input Type</label>
+              <select
+                value={local.inputType || "text"}
+                onChange={(e) => handleChange("inputType", e.target.value )}
+                className="w-full px-3 py-2 border rounded"
+              >
+                <option value="text">Text</option>
+                <option value="number">Number</option>
+                <option value="email">Email</option>
+                <option value="password">Password</option>
+              </select>
+            </div>
+            <div>
               <label className="text-sm">Name</label>
               <Input
                 value={local.name || ""}
@@ -52,6 +67,25 @@ function FieldSidebar({ open, onClose, type, draft, onChangeDraft, onSave }) {
                 onChange={(e) => handleChange("placeholder", e.target.value)}
               />
             </div>
+
+            {
+              local.inputType === "password" && (
+                <>
+                  <div>
+                    <Label>Min Lenght</Label>
+                    <Input 
+                      type="number"
+                      value={local.minLegth || 8}
+                      onChange={(e) => handleChange("minlLength", e.target.value)} 
+                      />
+                  </div>
+                  <CheckboxWithLabel label={"Require Number"} name={"reqNumber"} checked={local.reqNumber} handleChange={handleChange} />
+                  <CheckboxWithLabel label={"Require Special Character"} name={"reqSpecial"} checked={local.reqSpecial} handleChange={handleChange} />
+                  <CheckboxWithLabel label={"Require Uppercase"} name={"reqUpper"} checked={local.reqUpper} handleChange={handleChange} />
+                </>
+              )
+            }
+
             <label className="inline-flex items-center gap-2 text-sm">
               <input
                 type="checkbox"

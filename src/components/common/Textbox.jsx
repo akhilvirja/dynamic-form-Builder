@@ -2,7 +2,7 @@ import { Label } from '@radix-ui/react-label'
 import React from 'react'
 import { Input } from '../ui/input'
 
-function Textbox({name, label, required, value = "", handleChange, placeholder=''}) {
+function Textbox({name, label, required, value = "", handleChange, placeholder='', type="text"}) {
   return (
     <>
         <Label htmlFor={name}>
@@ -12,7 +12,7 @@ function Textbox({name, label, required, value = "", handleChange, placeholder='
         <Input
             id={name}
             name={name}
-            type="text"
+            type={type}
             required={required}
             value={value}
             placeholder={placeholder}

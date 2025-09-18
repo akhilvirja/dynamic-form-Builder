@@ -74,7 +74,7 @@ function FormBuilder() {
     setSidebarType(type)
     setEditingIndex(null)
     // create a default draft
-    if (type === 'text') setDraft({ type: 'text', label: 'Text', name: nextName('text'), required: false, placeholder: '' })
+    if (type === 'text') setDraft({ type: 'text', inputType: 'text' ,label: 'Text', name: nextName('text'), required: false, placeholder: '',minLength: 8, reqNumber: true, reqSpecial: true, reqUpper: true })
     if (type === 'title') setDraft({ type: 'title', label: 'Section' })
     if (type === 'dropdown') setDraft({ type: 'dropdown', label: 'Select', name: nextName('dropdown'), options: ['Option 1','Option 2'], default: 'Option 1', required: false })
     if (type === 'checkbox') setDraft({ type: 'checkbox', label: 'Accept', name: nextName('checkbox'), default: false })
@@ -180,7 +180,7 @@ function FormBuilder() {
                 <li key={field.id || idx} className='flex items-center justify-between gap-2 p-2 border rounded hover:bg-gray-50'>
                   <div className='flex-1 min-w-0'>
                     <div className='text-sm font-medium truncate'>{field.label}</div>
-                    <div className='text-xs text-gray-500'>{field.type}</div>
+                    <div className='text-xs text-gray-500'>{field.type === "text" ? `${field.type}-${field.inputType}` : field.type}</div>
                   </div>
                   <div className='flex gap-1'>
                     <Button size="sm" variant="ghost" onClick={() => handleEditField(idx)}>

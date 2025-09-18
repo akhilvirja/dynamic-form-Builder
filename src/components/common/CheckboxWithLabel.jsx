@@ -5,16 +5,18 @@ import React from 'react'
 function CheckboxWithLabel({label, name, checked=false, handleChange, required = false}) {
   return (
     <>
-        <Checkbox
-            checked={checked}
-            required={required}
-            onCheckedChange={(checked) =>
-            handleChange(name, checked)
-            }
-        />
-        <Label>
-          {label}
-        </Label>
+    <div className='flex gap-5'>
+      <Checkbox
+          checked={checked}
+          required={required}
+          onCheckedChange={(checked) =>
+          handleChange(name, checked)
+          }
+      />
+      <Label>
+        {label}
+      </Label>
+    </div>
     </>
   )
 }
