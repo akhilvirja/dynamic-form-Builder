@@ -8,6 +8,7 @@ import Textbox from './common/Textbox'
 import Dropdown from './common/Dropdown'
 import CheckboxWithLabel from './common/CheckboxWithLabel'
 import Radio from './common/Radio'
+import FormResponses from './FormResponses'
 
 function FormViewer() {
   const { formId } = useParams()
@@ -16,11 +17,13 @@ function FormViewer() {
   const [formData, setFormData] = useState({})
   const [errors, setErrors] = useState({})
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [responses, setResponses] = useState([])
 
   useEffect(() => {
     // Load data from localStorage
     const savedForms = JSON.parse(localStorage.getItem('savedForms') || '[]')
     const foundForm = savedForms.find(f => f.id === formId)
+    const formResponses =JSON.parse(localStorage.getItem('formSubmissions') || '[]').filter((response) => response.formId === formId)
     
     if (foundForm) {
       setForm(foundForm)
@@ -28,6 +31,12 @@ function FormViewer() {
       navigate('/forms')
       return
     }
+
+    if (formResponses){
+      setResponses(formResponses)
+      console.log(responses)
+    }
+
   }, [formId, navigate])
 
   useEffect(() => {
@@ -210,6 +219,9 @@ function FormViewer() {
             </form>
           </CardContent>
         </Card>
+        {
+          responses.length > 0 && <FormResponses responses={responses} />
+        }
       </div>
     </div>
   )
